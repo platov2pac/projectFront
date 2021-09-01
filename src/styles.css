@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+  min-height: 100vh;
+}
+.p-button-raised{
+  border: 1px solid black;
+  padding: 0 20px;
+  background: #ffa580;
+  box-shadow: 3px 3px 1px #95a4ff, 3px 3px 1px 1px black!important;
+  line-height: 28pt;
+}
+.p-button-raised:hover {
+  background: rgba(0, 0, 0, 1)!important;
+  color: white;
+}
+#float-login,#float-password {
+  display: block;
+  width: 100%;
+  font-size: 14pt;
+  font-family: 'Fjalla One', sans-serif;
+  line-height: 28pt;
+  margin-bottom: 28pt;
+  border: none;
+  border-bottom: 5px solid black;
+  background: #f8f4e5;
+  min-width: 250px;
+  color: black;
+  padding-left: 5px;
+  outline: none;
+}
