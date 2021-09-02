@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Fjalla One';
+  src: url('assets/fonts/FjallaOne-Regular.ttf');
+}
+p {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 20pt;
+  color: rgba(0, 0, 0, 0.8);
+}
 body{
   background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-2210775-jpeg.jpg");
   background-size: cover;
@@ -14,6 +23,7 @@ body{
   background: #ffa580;
   box-shadow: 3px 3px 1px #95a4ff, 3px 3px 1px 1px black!important;
   line-height: 28pt;
+  letter-spacing: 2px;
 }
 .p-button-raised:hover {
   background: rgba(0, 0, 0, 1)!important;
@@ -33,4 +43,23 @@ body{
   color: black;
   padding-left: 5px;
   outline: none;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 130vh;
+  min-height: 100vh;
+  background: #f8f4e5;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  box-shadow: 15px 0 1px #ffa580, 15px 0 1px 2px black;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.footer {
+  border-top: 2px solid black;
+  height: 100px;
 }

@@ -1,14 +1,36 @@
 [
   {
     "login": "ilya",
-    "password": "123"
+    "password": "123",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_ADMIN"
+      }
+    ]
   },
   {
     "login": "alex",
-    "password": "123"
+    "password": "123",
+    "roles": [
+      {
+        "id": 2,
+        "name": "ROLE_USER"
+      }
+    ]
   },
   {
-    "login": "alex",
-    "password": "123"
+    "login": "sam",
+    "password": "123",
+    "roles": [
+      {
+        "id": 1,
+        "name": "ROLE_ADMIN"
+      },
+      {
+        "id": 2,
+        "name": "ROLE_USER"
+      }
+    ]
   }
 ]

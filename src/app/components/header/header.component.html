@@ -1,0 +1,17 @@
+<div class="header">
+  <p>AdmApp</p>
+  <div class="nav-bar">
+    <button pButton pRipple label="Main" class="p-button-raised" (click)="welcome()"></button>
+
+
+    <div *ngIf="isAdmin">
+      <button pButton pRipple label="List Users" class="p-button-raised" (click)="userList()"></button>
+    </div>
+
+
+  </div>
+  <div class="user-logout">
+    <p>{{login}}</p>
+    <button pButton pRipple type="submit" label="LogOut" class="p-button-raised" (click)="logout()"></button>
+  </div>
+</div>
