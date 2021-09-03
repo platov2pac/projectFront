@@ -15,6 +15,10 @@ export class UserServiceService {
     }));
   }
 
+  getAllUser(): Observable<User[]>{
+    return this.http.get<User[]>('/assets/users.json');
+  }
+
   constructor(private http: HttpClient) {
   }
 }

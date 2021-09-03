@@ -1,0 +1,30 @@
+<div class="main">
+  <app-header></app-header>
+  <div class="content">
+    <form [formGroup]="checkOutForm" class="edit-form">
+      <fieldset>
+        <legend>Вы долбаеб</legend>
+
+        <label>
+          <div class="p-float-label">
+            <input id="float-login" class="input" type="text" pInputText formControlName="login">
+            <label for="float-login">Username</label>
+          </div>
+          <div class="p-float-label">
+            <input id="float-password" class="input" type="text" pInputText formControlName="login">
+            <label for="float-password">Password</label>
+          </div>
+          <div class="p-float-label">
+            <input id="float-email" class="input" type="text" pInputText formControlName="login">
+            <label for="float-email">Email</label>
+          </div>
+          <div class="p-float-label">
+            <input id="float-dob" class="input" type="date" pInputText formControlName="login">
+          </div>
+        </label>
+        <button pButton pRipple type="submit" label="Accept Changes" class="p-button-raised"></button>
+      </fieldset>
+    </form>
+  </div>
+  <app-footer class="footer"></app-footer>
+</div>

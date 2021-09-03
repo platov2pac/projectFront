@@ -1,7 +1,91 @@
 <div class="main">
   <app-header></app-header>
   <div class="content">
+    <!--    <table class="main-table">-->
+    <!--      <caption>-->
+    <!--        <p>-->
+    <!--          All Users-->
+    <!--          <a [title]="'Add user'" (click)="addUser()">-->
+    <!--          <i class="pi pi-user-plus"></i>-->
+    <!--          </a>-->
+    <!--        </p>-->
+    <!--      </caption>-->
 
+    <!--      <thead>-->
+    <!--      <tr>-->
+    <!--        <th>-->
+    <!--          <p>-->
+    <!--            Login-->
+    <!--          </p>-->
+    <!--        </th>-->
+    <!--        <th>-->
+    <!--          <p>-->
+    <!--            Role-->
+    <!--          </p>-->
+    <!--        </th>-->
+    <!--        <th>-->
+    <!--          <p>-->
+    <!--            Email-->
+    <!--          </p>-->
+    <!--        </th>-->
+    <!--        <th>-->
+    <!--          <p>-->
+    <!--            Dob-->
+    <!--          </p>-->
+    <!--        </th>-->
+    <!--      </tr>-->
+    <!--      </thead>-->
+    <!--      <tbody>-->
+    <!--      <tr *ngFor="let user of users">-->
+    <!--        <td>{{user.login}}</td>-->
+    <!--        <td>{{displayRoles(user.roles)}}</td>-->
+    <!--        <td>{{user.email}}</td>-->
+    <!--        <td>{{user.dob}}</td>-->
+    <!--        <td>-->
+    <!--          <a [title]="'Edit user'" (click)="editUser(user.login)">-->
+    <!--            <i class="pi pi-pencil" style="font-size: 1.5rem"></i>-->
+    <!--          </a>-->
+    <!--          <i class="pi pi-trash" style="font-size: 1.5rem"></i>-->
+    <!--        </td>-->
+    <!--      </tr>-->
+    <!--      </tbody>-->
+    <!--    </table>-->
+    <div>
+      <p>
+        All Users
+        <a [title]="'Add user'" (click)="addUser()">
+          <i class="pi pi-user-plus"></i>
+        </a>
+      </p>
+    </div>
+    <div class="card" class="main-table">
+      <p-table [value]="users" [scrollable]="true" scrollHeight="686.693px" [resizableColumns]="true"
+               [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Login</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Dob</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+          <tr>
+            <td>{{user.login}}</td>
+            <td>{{displayRoles(user.roles)}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.dob}}</td>
+            <td>
+              <a [title]="'Edit user'" (click)="editUser(user.login)">
+                <i class="pi pi-pencil" style="font-size: 1.5rem"></i>
+              </a>
+              <i class="pi pi-trash" style="font-size: 1.5rem"></i>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </div>
   <app-footer class="footer"></app-footer>
 </div>

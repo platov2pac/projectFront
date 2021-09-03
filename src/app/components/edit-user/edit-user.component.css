@@ -1,0 +1,11 @@
+.edit-form{
+  margin: 0 15%;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+form {
+  margin: 0;
+}

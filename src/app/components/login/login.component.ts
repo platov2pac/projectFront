@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     this.userService.getUserByLoginPassword(this.user.login, this.user.password).subscribe(
       (data: User[]) => {
         this.authUser = data;
-        console.log(this.authUser)
         if (this.authUser.length != 0) {
           this.authUser.forEach(user => {
             localStorage.setItem("login", user.login);

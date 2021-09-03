@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {ButtonModule} from 'primeng/button';
-import {PrimeIcons} from "primeng/api";
 import {InputTextModule} from 'primeng/inputtext';
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
@@ -12,8 +11,10 @@ import {LoginComponent} from './components/login/login.component';
 import {RippleModule} from "primeng/ripple";
 import {HeaderComponent} from './components/header/header.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { UserTableComponent } from './components/user-table/user-table.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {UserTableComponent} from './components/user-table/user-table.component';
+import {EditUserComponent} from './components/edit-user/edit-user.component';
+import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -22,8 +23,8 @@ import { UserTableComponent } from './components/user-table/user-table.component
     HeaderComponent,
     WelcomeComponent,
     FooterComponent,
-    UserTableComponent
-
+    UserTableComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -32,11 +33,15 @@ import { UserTableComponent } from './components/user-table/user-table.component
     ReactiveFormsModule,
     InputTextModule,
     HttpClientModule,
+    TableModule,
+
     RouterModule.forRoot([
       {path: '', redirectTo: '/auth', pathMatch: 'full'},
       {path: 'auth', component: LoginComponent},
-      {path:'welcome', component:WelcomeComponent},
-      {path:'userList',component:UserTableComponent}
+      {path: 'welcome', component: WelcomeComponent},
+      {path: 'userList', component: UserTableComponent},
+      {path: 'editUser/:userLogin', component: EditUserComponent},
+      {path: 'editUser', component: EditUserComponent}
     ])
   ],
   providers: [],

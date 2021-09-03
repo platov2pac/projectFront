@@ -6,11 +6,11 @@
 
 <form [formGroup]="checkOutForm" (ngSubmit)="onSubmit(checkOutForm.value)">
 <span class="p-float-label">
-    <input id="float-login" type="text" pInputText formControlName="login">
+    <input id="float-login" class="input" type="text" pInputText formControlName="login">
     <label for="float-login">Username</label>
 </span>
   <span class="p-float-label">
-    <input id="float-password" type="password" pInputText formControlName="password">
+    <input id="float-password" class="input" type="password" pInputText formControlName="password">
     <label for="float-password">Password</label>
 </span>
 
