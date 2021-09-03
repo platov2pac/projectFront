@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 
@@ -15,6 +15,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {UserTableComponent} from './components/user-table/user-table.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {TableModule} from "primeng/table";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import {TableModule} from "primeng/table";
     InputTextModule,
     HttpClientModule,
     TableModule,
+    CheckboxModule,
+    FormsModule,
 
     RouterModule.forRoot([
       {path: '', redirectTo: '/auth', pathMatch: 'full'},

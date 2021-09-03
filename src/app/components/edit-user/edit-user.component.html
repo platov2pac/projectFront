@@ -21,6 +21,14 @@
           <div class="p-float-label">
             <input id="float-dob" class="input" type="date" pInputText formControlName="login">
           </div>
+          <div class="checkboxes">
+            <div class="p-field-checkbox">
+              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="admin" label="admin"></p-checkbox>
+            </div>
+            <div class="p-field-checkbox">
+              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="user" label="user"></p-checkbox>
+            </div>
+          </div>
         </label>
         <button pButton pRipple type="submit" label="Accept Changes" class="p-button-raised"></button>
       </fieldset>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserServiceService} from "../../service/user-service.service";
 import {Router} from "@angular/router";
 
@@ -9,21 +9,23 @@ import {Router} from "@angular/router";
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
+  selectedRoles: string [] = [];
+  checkOutForm: FormGroup;
 
-  checkOutForm
-  constructor(private formBuilder:FormBuilder,
-              private userService:UserServiceService,
-              private router:Router) {
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserServiceService,
+              private router: Router) {
     this.checkOutForm = this.formBuilder.group({
-      login:'',
-      password:'',
-      email:'',
-      dob:'',
-      roles:[]
+      login: '',
+      password: '',
+      email: '',
+      dob: '',
+      roles: []
     })
   }
 
   ngOnInit(): void {
+    this.selectedRoles.push("admin")
   }
 
 }
