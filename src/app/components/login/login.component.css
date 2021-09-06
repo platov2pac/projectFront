@@ -16,6 +16,6 @@
   font-family: 'Fjalla One', sans-serif;
   cursor: default;
 }
-#float-login:focus, #float-password:focus{
+.input:focus{
   border-bottom: 5px solid #ffa580;
 }

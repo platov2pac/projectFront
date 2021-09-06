@@ -27,13 +27,11 @@ export class UserTableComponent implements OnInit {
   ) {
 
 
+
   }
 
-  ngOnInit(): void {
-    this.userService.getAllUser().subscribe((data) => {
-      this.users = data;
-      console.log(this.users)
-    });
+  ngOnInit() {
+    this.users = this.userService.getAllLocalUsers();
   }
 
   displayRoles(roles: Role[]) {

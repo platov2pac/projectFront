@@ -16,6 +16,7 @@ import {UserTableComponent} from './components/user-table/user-table.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {TableModule} from "primeng/table";
 import {CheckboxModule} from "primeng/checkbox";
+import { AddFormComponent } from './components/add-form/add-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {CheckboxModule} from "primeng/checkbox";
     WelcomeComponent,
     FooterComponent,
     UserTableComponent,
-    EditUserComponent
+    EditUserComponent,
+    AddFormComponent
   ],
   imports: [
     BrowserModule,

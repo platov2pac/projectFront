@@ -1,38 +1,48 @@
 <div class="main">
   <app-header></app-header>
   <div class="content">
-    <form [formGroup]="checkOutForm" class="edit-form">
-      <fieldset>
-        <legend>Вы долбаеб</legend>
 
-        <label>
+    <div *ngIf="loginAuthUser; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <form [formGroup]="checkOutForm" class="edit-form">
+        <fieldset>
+          <legend>Edit User</legend>
           <div class="p-float-label">
-            <input id="float-login" class="input" type="text" pInputText formControlName="login">
+            <input id="float-login" class="input" type="text" pInputText formControlName="login"
+                   [(ngModel)]="users[0].login">
             <label for="float-login">Username</label>
           </div>
           <div class="p-float-label">
-            <input id="float-password" class="input" type="text" pInputText formControlName="login">
+            <input id="float-password" class="input" type="password" pInputText formControlName="password">
             <label for="float-password">Password</label>
           </div>
           <div class="p-float-label">
-            <input id="float-email" class="input" type="text" pInputText formControlName="login">
+            <input id="float-email" class="input" type="text" pInputText formControlName="email">
             <label for="float-email">Email</label>
           </div>
           <div class="p-float-label">
-            <input id="float-dob" class="input" type="date" pInputText formControlName="login">
+            <input id="float-dob" class="input" type="date" pInputText formControlName="dob">
           </div>
+          <p>Select user roles:</p>
           <div class="checkboxes">
             <div class="p-field-checkbox">
-              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="admin" label="admin"></p-checkbox>
+              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="admin"
+                          label="admin"></p-checkbox>
             </div>
             <div class="p-field-checkbox">
-              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="user" label="user"></p-checkbox>
+              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="user"
+                          label="user"></p-checkbox>
             </div>
           </div>
-        </label>
-        <button pButton pRipple type="submit" label="Accept Changes" class="p-button-raised"></button>
-      </fieldset>
-    </form>
+          <button pButton pRipple type="submit" label="Accept Changes" class="p-button-raised"></button>
+        </fieldset>
+      </form>
+    </ng-template>
+    <ng-template #elseBlock>
+      <app-add-form [checkOutForm]="checkOutForm"></app-add-form>
+    </ng-template>
+
+
   </div>
   <app-footer class="footer"></app-footer>
 </div>
