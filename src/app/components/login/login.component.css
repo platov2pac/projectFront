@@ -16,6 +16,13 @@
   font-family: 'Fjalla One', sans-serif;
   cursor: default;
 }
-.input:focus{
+
+.input:focus {
   border-bottom: 5px solid #ffa580;
+}
+
+.selectLang {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

@@ -3,7 +3,7 @@
   <div class="content">
     <div>
       <p>
-        All Users
+        {{'List Users' | translate}}
         <a [title]="'Add user'" (click)="addUser()">
           <i class="pi pi-user-plus"></i>
         </a>
@@ -14,24 +14,26 @@
                [autoLayout]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th>Login</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th>Dob</th>
-            <th>Action</th>
+            <th>{{'Login'| translate}}</th>
+            <th>{{'Role'| translate}}</th>
+            <th>{{'Email'| translate}}</th>
+            <th>{{'Dob'| translate}}</th>
+            <th>{{'Action'| translate}}</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
           <tr>
             <td>{{user.login}}</td>
-            <td>{{user.roles}}</td>
+            <td>{{displayRoles(user.roles)}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.dob}}</td>
+            <td>{{user.dob | date}}</td>
             <td>
               <a [title]="'Edit user'" (click)="editUser(user.login)">
                 <i class="pi pi-pencil" style="font-size: 1.5rem"></i>
               </a>
-              <i class="pi pi-trash" style="font-size: 1.5rem"></i>
+              <a [title]="'Delete user'" (click)="deleteUser(user.login)">
+                <i class="pi pi-trash" style="font-size: 1.5rem"></i>
+              </a>
             </td>
           </tr>
         </ng-template>

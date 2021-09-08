@@ -68,3 +68,8 @@ body{
   cursor: pointer;
   font-size: 2rem;
 }
+.input.ng-touched.ng-invalid + label, .input.ng-touched.ng-invalid{
+  border-color: #f44336;
+  color: #f44336;
+
+}

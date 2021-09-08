@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit {
         this.isAdmin=true;
       }
     })
-    console.log(this.roles)
   }
 
 }

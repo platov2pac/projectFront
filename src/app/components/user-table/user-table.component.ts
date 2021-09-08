@@ -10,8 +10,8 @@ import {Role} from "../../dto/role";
   styleUrls: ['./user-table.component.css']
 })
 export class UserTableComponent implements OnInit {
-  users!: User[];
-  roles!: string[];
+  users: User[] = [];
+  roles: string[] = [];
 
   editUser(login: string) {
     this.router.navigate(['editUser', login]);
@@ -21,17 +21,19 @@ export class UserTableComponent implements OnInit {
     this.router.navigate(['editUser']);
   }
 
+  deleteUser(login:string){
+    this.userService.deleteLocalUserByLogin(login);
+  }
   constructor(
     private userService: UserServiceService,
     private router: Router
   ) {
 
-
-
   }
 
   ngOnInit() {
     this.users = this.userService.getAllLocalUsers();
+
   }
 
   displayRoles(roles: Role[]) {

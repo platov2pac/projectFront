@@ -16,7 +16,8 @@ import {UserTableComponent} from './components/user-table/user-table.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {TableModule} from "primeng/table";
 import {CheckboxModule} from "primeng/checkbox";
-import { AddFormComponent } from './components/add-form/add-form.component';
+import { TranslatePipe } from './translate.pipe';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { AddFormComponent } from './components/add-form/add-form.component';
     FooterComponent,
     UserTableComponent,
     EditUserComponent,
-    AddFormComponent
+    TranslatePipe,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,7 @@ import { AddFormComponent } from './components/add-form/add-form.component';
     RouterModule.forRoot([
       {path: '', redirectTo: '/auth', pathMatch: 'full'},
       {path: 'auth', component: LoginComponent},
+      {path: 'auth/:lang', component: LoginComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'userList', component: UserTableComponent},
       {path: 'editUser/:userLogin', component: EditUserComponent},

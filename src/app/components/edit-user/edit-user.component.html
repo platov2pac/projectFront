@@ -1,47 +1,51 @@
 <div class="main">
   <app-header></app-header>
   <div class="content">
-
-    <div *ngIf="loginAuthUser; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-      <form [formGroup]="checkOutForm" class="edit-form">
-        <fieldset>
+    <form [formGroup]="checkOutForm" (ngSubmit)="editUser(checkOutForm.value, loginAuthUser!=undefined)"
+          class="edit-form">
+      <fieldset>
+        <div *ngIf="loginAuthUser; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
           <legend>Edit User</legend>
-          <div class="p-float-label">
-            <input id="float-login" class="input" type="text" pInputText formControlName="login"
-                   [(ngModel)]="users[0].login">
-            <label for="float-login">Username</label>
+        </ng-template>
+        <ng-template #elseBlock>
+          <legend>AddUser</legend>
+        </ng-template>
+        <div class="p-float-label">
+          <input id="float-login" class="input" type="text" pInputText [(ngModel)]="user.login" formControlName="login">
+          <label for="float-login">{{'Username'|translate}}</label>
+        </div>
+        <div class="p-float-label">
+          <input id="float-password" class="input" type="password" pInputText formControlName="password"
+                 [(ngModel)]="user.password">
+          <label for="float-password">{{'Password'| translate}}</label>
+        </div>
+        <div class="p-float-label">
+          <input id="float-email" class="input" type="text" pInputText formControlName="email"
+                 [(ngModel)]="user.email">
+          <label for="float-email">{{'Email'|translate}}</label>
+        </div>
+        <div class="p-float-label">
+          <input id="float-dob" class="input" type="date" pInputText formControlName="dob"
+                 [(ngModel)]="user.dob">
+        </div>
+        <p>{{'Select user roles:'| translate}}</p>
+        <div class="checkboxes">
+          <div class="p-field-checkbox">
+            <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles"
+                        value="ROLE_ADMIN"
+                        label="admin"></p-checkbox>
           </div>
-          <div class="p-float-label">
-            <input id="float-password" class="input" type="password" pInputText formControlName="password">
-            <label for="float-password">Password</label>
+          <div class="p-field-checkbox">
+            <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles"
+                        value="ROLE_USER"
+                        label="user"></p-checkbox>
           </div>
-          <div class="p-float-label">
-            <input id="float-email" class="input" type="text" pInputText formControlName="email">
-            <label for="float-email">Email</label>
-          </div>
-          <div class="p-float-label">
-            <input id="float-dob" class="input" type="date" pInputText formControlName="dob">
-          </div>
-          <p>Select user roles:</p>
-          <div class="checkboxes">
-            <div class="p-field-checkbox">
-              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="admin"
-                          label="admin"></p-checkbox>
-            </div>
-            <div class="p-field-checkbox">
-              <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles" value="user"
-                          label="user"></p-checkbox>
-            </div>
-          </div>
-          <button pButton pRipple type="submit" label="Accept Changes" class="p-button-raised"></button>
-        </fieldset>
-      </form>
-    </ng-template>
-    <ng-template #elseBlock>
-      <app-add-form [checkOutForm]="checkOutForm"></app-add-form>
-    </ng-template>
-
+        </div>
+        <button pButton pRipple [disabled]="checkOutForm.invalid" type="submit" label="{{'Accept'| translate}}"
+                class="p-button-raised"></button>
+      </fieldset>
+    </form>
 
   </div>
   <app-footer class="footer"></app-footer>

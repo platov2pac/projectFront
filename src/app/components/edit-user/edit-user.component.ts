@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserServiceService} from "../../service/user-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../dto/user";
@@ -14,29 +14,51 @@ export class EditUserComponent implements OnInit {
   selectedRoles: string [] = [];
   checkOutForm: FormGroup;
   loginAuthUser: any;
-  users!: User[];
+  user: User = {login: '', email: '', password: '', dob: '', roles: []};
+  users: User[] = [];
+  userRoles: Role[] = [];
+
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserServiceService,
-              private router: ActivatedRoute) {
+              private router: ActivatedRoute,
+              private redRouter: Router) {
     this.checkOutForm = this.formBuilder.group({
-      login: '',
-      password: '',
-      email: '',
-      dob: '',
-      roles:''
+      login: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required]],
+      email: ['', [Validators.required,Validators.email]],
+      dob: ['', [Validators.required]],
+      roles: ['',[Validators.required]]
     });
     this.router.paramMap.subscribe(param => {
       this.loginAuthUser = param.get('userLogin');
     });
+    if (this.loginAuthUser != undefined) {
+      this.users = this.userService.getLocalUserByLogin(this.loginAuthUser);
+      this.users.forEach(user => {
+        user.roles.forEach(role => this.selectedRoles.push(role.name));
+        this.user = user;
+      })
+    }
+
   }
 
+  editUser(user: User, isEdit: boolean) {
+    user.roles.forEach(role => {
+      // @ts-ignore
+      let userRole: Role = {name: role};
+      this.userRoles.push(userRole);
+    });
+    user.roles = this.userRoles;
+    if (isEdit) {
+      this.userService.editLocalUer(user);
+    } else {
+      this.userService.addLocalUser(user);
+    }
+    this.redRouter.navigate(['/userList']);
+  }
 
   ngOnInit(): void {
-    this.selectedRoles.push("admin");
-    this.userService.getUserByLogin(this.loginAuthUser).subscribe((data) => {
-      this.users = data;
-    })
   }
 
 }

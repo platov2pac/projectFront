@@ -1,19 +1,23 @@
-
 <div class="login-form">
   <div class="signup">
-    <h1>Sing In</h1>
+    <h1>{{'Sign In' | translate}}</h1>
   </div>
 
-<form [formGroup]="checkOutForm" (ngSubmit)="onSubmit(checkOutForm.value)">
+  <form [formGroup]="checkOutForm" novalidate (ngSubmit)="onSubmit(checkOutForm.value)">
 <span class="p-float-label">
     <input id="float-login" class="input" type="text" pInputText formControlName="login">
-    <label for="float-login">Username</label>
+    <label for="float-login">{{'Username'| translate}}</label>
 </span>
-  <span class="p-float-label">
+    <span class="p-float-label">
     <input id="float-password" class="input" type="password" pInputText formControlName="password">
-    <label for="float-password">Password</label>
+    <label for="float-password">{{'Password'| translate}}</label>
 </span>
 
-  <button pButton pRipple type="submit" label="Login" class="p-button-raised"></button>
-</form>
+    <button pButton pRipple [disabled]="checkOutForm.invalid" type="submit" label="{{'Login' | translate}}"
+            class="p-button-raised"></button>
+    <div class="selectLang">
+      <a href="/auth/en">en</a>
+      <a href="/auth/ru">ru</a>
+    </div>
+  </form>
 </div>
