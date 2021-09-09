@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, Subscription} from "rxjs";
 import {User} from "../dto/user";
 import {map} from "rxjs/operators";
@@ -12,18 +12,19 @@ export class UserServiceService {
   users: User[] = users;
 
   getUserByLoginPassword(login: string, password: string): Observable<User[]> {
-    return this.http.get<User[]>('/assets/users.json').pipe(map((response) => {
-      return response.filter((data) => data.login === login && data.password === password);
-    }));
+    const body = {
+      login: login,
+      pass: password
+    }
+    return this.http.post<User[]>('/assets/users.json', body);
   }
   getAllUser(): Observable<User[]> {
-    return this.http.get<User[]>('/assets/users.json');
+    return this.http.get<User[]>('http://localhost:8080/listUsers.jhtml');
 
   }
-  getUserByLogin(login: string): Observable<User[]> {
-    return this.http.get<User[]>('/assets/users.json').pipe(map((response) => {
-      return response.filter((data) => data.login === login);
-    }));
+  getUserByLogin(login: string): Observable<User> {
+    const params = new HttpParams().set('loginUser', login);
+    return this.http.get<User>('http://localhost:8080/edituser.jhtml', {params});
   }
 
   //local methods

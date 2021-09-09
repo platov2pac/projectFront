@@ -26,21 +26,13 @@ export class EditUserComponent implements OnInit {
     this.checkOutForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required]],
-      email: ['', [Validators.required,Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       dob: ['', [Validators.required]],
-      roles: ['',[Validators.required]]
+      roles: [[], [Validators.required]]
     });
     this.router.paramMap.subscribe(param => {
       this.loginAuthUser = param.get('userLogin');
     });
-    if (this.loginAuthUser != undefined) {
-      this.users = this.userService.getLocalUserByLogin(this.loginAuthUser);
-      this.users.forEach(user => {
-        user.roles.forEach(role => this.selectedRoles.push(role.name));
-        this.user = user;
-      })
-    }
-
   }
 
   editUser(user: User, isEdit: boolean) {
@@ -59,6 +51,15 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.loginAuthUser != undefined) {
+      this.userService.getUserByLogin(this.loginAuthUser).subscribe((user) => {
+        user.roles.forEach(role => {
+          this.selectedRoles.push(role.name);
+        });
+        this.user = user;
+        alert(this.selectedRoles);
+      })
+    }
   }
 
 }
