@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   authUser!: User;
   user!: LoginForm;
   checkOutForm;
+  errorStatus: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
     private activatedRouter: ActivatedRoute
   ) {
     this.checkOutForm = this.formBuilder.group({
-      login: ['',Validators.required],
-      password: ['',[Validators.required, Validators.minLength(3)]]
+      login: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(3)]]
     })
   }
 
@@ -34,27 +35,47 @@ export class LoginComponent implements OnInit {
       this.checkOutForm.reset();
       this.user = user;
     }
-    this.userService.getLocalUserByLoginAndPassword(this.user.login, this.user.password).forEach(
-      (data) => {
-        this.authUser = data;
-        if (this.authUser!= undefined) {
-            localStorage.setItem("login", this.authUser.login);
-            let rolesNames: any[];
-            rolesNames = [];
-            this.authUser.roles.forEach(role => {
-              rolesNames.push(role.name)
-            })
-            localStorage.setItem("roles", JSON.stringify(rolesNames));
+    this.userService.getUserByLoginPassword(this.user.login, this.user.password).subscribe((user) => {
+        this.authUser = user;
+        console.log()
+        if (this.authUser != undefined) {
+          localStorage.setItem("login", this.authUser.login);
+          let rolesNames: any[];
+          rolesNames = [];
+          this.authUser.roles.forEach(role => {
+            rolesNames.push(role.name)
+          })
+          localStorage.setItem("roles", JSON.stringify(rolesNames));
           this.router.navigate(['/welcome']);
         }
-      });
+      }
+      ,
+      error => {
+        this.errorStatus = error.status;
+      }
+    );
+    // this.userService.getLocalUserByLoginAndPassword(this.user.login, this.user.password).forEach(
+    //   (data) => {
+    //     this.authUser = data;
+    //     if (this.authUser != undefined) {
+    //       localStorage.setItem("login", this.authUser.login);
+    //       let rolesNames: any[];
+    //       rolesNames = [];
+    //       this.authUser.roles.forEach(role => {
+    //         rolesNames.push(role.name)
+    //       })
+    //       localStorage.setItem("roles", JSON.stringify(rolesNames));
+    //       this.router.navigate(['/welcome']);
+    //     }
+    //   });
   }
 
   ngOnInit(): void {
     this.activatedRouter.paramMap.subscribe(param => {
-      if(param.get('lang')!==null){
-        localStorage.setItem('locale',<string>param.get('lang'));
-      };
+      if (param.get('lang') !== null) {
+        localStorage.setItem('locale', <string>param.get('lang'));
+      }
+
     });
   }
 

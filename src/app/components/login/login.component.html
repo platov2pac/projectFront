@@ -4,6 +4,7 @@
   </div>
 
   <form [formGroup]="checkOutForm" novalidate (ngSubmit)="onSubmit(checkOutForm.value)">
+    <div *ngIf="errorStatus===404" style="color: red">Wrong login or password</div>
 <span class="p-float-label">
     <input id="float-login" class="input" type="text" pInputText formControlName="login">
     <label for="float-login">{{'Username'| translate}}</label>

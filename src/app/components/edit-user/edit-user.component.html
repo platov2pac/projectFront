@@ -12,32 +12,32 @@
           <legend>AddUser</legend>
         </ng-template>
         <div class="p-float-label">
-          <input id="float-login" class="input" type="text" pInputText [(ngModel)]="user.login" formControlName="login">
+          <input id="float-login" class="input" type="text" pInputText formControlName="login">
           <label for="float-login">{{'Username'|translate}}</label>
         </div>
         <div class="p-float-label">
           <input id="float-password" class="input" type="password" pInputText formControlName="password"
-                 [(ngModel)]="user.password">
+          >
           <label for="float-password">{{'Password'| translate}}</label>
         </div>
         <div class="p-float-label">
           <input id="float-email" class="input" type="text" pInputText formControlName="email"
-                 [(ngModel)]="user.email">
+          >
           <label for="float-email">{{'Email'|translate}}</label>
         </div>
         <div class="p-float-label">
           <input id="float-dob" class="input" type="date" pInputText formControlName="dob"
-                 [(ngModel)]="user.dob">
+          >
         </div>
         <p>{{'Select user roles:'| translate}}</p>
         <div class="checkboxes">
           <div class="p-field-checkbox">
-            <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles"
+            <p-checkbox [formControl]="$any(checkOutForm).controls['roles']"
                         value="ROLE_ADMIN"
                         label="admin"></p-checkbox>
           </div>
           <div class="p-field-checkbox">
-            <p-checkbox [formControl]="$any(checkOutForm).controls['roles']" [(ngModel)]="selectedRoles"
+            <p-checkbox [formControl]="$any(checkOutForm).controls['roles']"
                         value="ROLE_USER"
                         label="user"></p-checkbox>
           </div>

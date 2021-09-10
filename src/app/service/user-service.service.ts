@@ -11,20 +11,35 @@ import {users} from "../users";
 export class UserServiceService {
   users: User[] = users;
 
-  getUserByLoginPassword(login: string, password: string): Observable<User[]> {
+  getUserByLoginPassword(login: string, password: string): Observable<User> {
     const body = {
       login: login,
-      pass: password
+      password: password
     }
-    return this.http.post<User[]>('/assets/users.json', body);
+    return this.http.post<User>('http://localhost:8080/auth.jhtml', body);
   }
+
   getAllUser(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:8080/listUsers.jhtml');
 
   }
+
   getUserByLogin(login: string): Observable<User> {
     const params = new HttpParams().set('loginUser', login);
     return this.http.get<User>('http://localhost:8080/edituser.jhtml', {params});
+  }
+
+  editUser(editedUser: User, isEdit:boolean) {
+    if(isEdit){
+    const params = new HttpParams().set('loginUser', editedUser.login);
+    return this.http.post('http://localhost:8080/edituser.jhtml', editedUser,{params});}
+    else{
+      return this.http.post('http://localhost:8080/edituser.jhtml', editedUser);
+    }
+  }
+  deleteByLogin(login:string){
+    const params = new HttpParams().set('deletableLogin',login)
+    return this.http.get<String>('http://localhost:8080/deleteUser.jhtml', {params});
   }
 
   //local methods
@@ -32,8 +47,8 @@ export class UserServiceService {
     return this.users.filter((user) => user.login === login);
   }
 
-  getLocalUserByLoginAndPassword(login:string, password:string): User[]{
-    return this.users.filter ((user)=>user.login === login && user.password === password);
+  getLocalUserByLoginAndPassword(login: string, password: string): User[] {
+    return this.users.filter((user) => user.login === login && user.password === password);
   }
 
   addLocalUser(user: User) {
@@ -43,20 +58,21 @@ export class UserServiceService {
   editLocalUer(editedUser: User) {
     this.users.forEach((editableUser, index) => {
       if (editableUser.login === editedUser.login) {
-        this.users.splice(index,1);
+        this.users.splice(index, 1);
         this.users.push(editedUser);
       }
     })
 
   }
 
-  deleteLocalUserByLogin(login:string){
-    this.users.forEach((user,index)=>{
-      if(user.login=== login){
-        users.splice(index,1)
+  deleteLocalUserByLogin(login: string) {
+    this.users.forEach((user, index) => {
+      if (user.login === login) {
+        users.splice(index, 1)
       }
     })
   }
+
   getAllLocalUsers() {
     console.log("service getalllocal")
     return this.users;

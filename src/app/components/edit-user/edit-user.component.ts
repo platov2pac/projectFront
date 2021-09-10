@@ -28,7 +28,7 @@ export class EditUserComponent implements OnInit {
       password: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       dob: ['', [Validators.required]],
-      roles: [[], [Validators.required]]
+      roles: [this.selectedRoles, [Validators.required]]
     });
     this.router.paramMap.subscribe(param => {
       this.loginAuthUser = param.get('userLogin');
@@ -42,12 +42,13 @@ export class EditUserComponent implements OnInit {
       this.userRoles.push(userRole);
     });
     user.roles = this.userRoles;
-    if (isEdit) {
-      this.userService.editLocalUer(user);
-    } else {
-      this.userService.addLocalUser(user);
-    }
-    this.redRouter.navigate(['/userList']);
+    this.userService.editUser(user, isEdit).subscribe(user => {
+        this.redRouter.navigate(['/userList']);
+      }
+    );
+    //this.userService.editLocalUer(user);
+
+
   }
 
   ngOnInit(): void {
@@ -55,9 +56,13 @@ export class EditUserComponent implements OnInit {
       this.userService.getUserByLogin(this.loginAuthUser).subscribe((user) => {
         user.roles.forEach(role => {
           this.selectedRoles.push(role.name);
+          // this.checkOutForm.controls['roles'].setValue(role.name);
         });
-        this.user = user;
-        alert(this.selectedRoles);
+        // this.user = user;
+        this.checkOutForm.controls['login'].setValue(user.login);
+        this.checkOutForm.controls['email'].setValue(user.email);
+        this.checkOutForm.controls['dob'].setValue(user.dob);
+
       })
     }
   }
