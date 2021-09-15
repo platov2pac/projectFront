@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from "../../service/user-service.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../../dto/user";
 import {Role} from "../../dto/role";
 
@@ -27,13 +27,19 @@ export class UserTableComponent implements OnInit {
 
   constructor(
     private userService: UserServiceService,
-    private router: Router
+    private router: Router,
   ) {
 
   }
 
   ngOnInit() {
-    this.userService.getAllUser().subscribe(users => this.users = users);
+    this.userService.getAllUser().subscribe(users => {
+      this.users = users
+    }, error => {
+      if (error.status === 403) {
+        this.router.navigate(['welcome']);
+      }
+    });
   }
 
   displayRoles(roles: Role[]) {

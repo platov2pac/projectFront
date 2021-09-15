@@ -13,7 +13,6 @@ import {Role} from 'src/app/dto/role';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  authUser!: User;
   user!: LoginForm;
   checkOutForm;
   errorStatus: any;
@@ -35,16 +34,17 @@ export class LoginComponent implements OnInit {
       this.checkOutForm.reset();
       this.user = user;
     }
-    this.userService.getUserByLoginPassword(this.user.login, this.user.password).subscribe((user) => {
-        this.authUser = user;
+    this.userService.getUserByLoginPassword(this.user.login, this.user.password).subscribe((resp) => {
         console.log()
-        if (this.authUser != undefined) {
-          localStorage.setItem("login", this.authUser.login);
+        if (resp != undefined) {
+          localStorage.setItem("login", resp.login);
+          localStorage.setItem("token", resp.token);
           let rolesNames: any[];
           rolesNames = [];
-          this.authUser.roles.forEach(role => {
+          resp.roles.forEach(role => {
             rolesNames.push(role.name)
           })
+          //console.log(resp.token)
           localStorage.setItem("roles", JSON.stringify(rolesNames));
           this.router.navigate(['/welcome']);
         }
@@ -52,22 +52,9 @@ export class LoginComponent implements OnInit {
       ,
       error => {
         this.errorStatus = error.status;
+        this.checkOutForm.controls['password'].reset();
       }
     );
-    // this.userService.getLocalUserByLoginAndPassword(this.user.login, this.user.password).forEach(
-    //   (data) => {
-    //     this.authUser = data;
-    //     if (this.authUser != undefined) {
-    //       localStorage.setItem("login", this.authUser.login);
-    //       let rolesNames: any[];
-    //       rolesNames = [];
-    //       this.authUser.roles.forEach(role => {
-    //         rolesNames.push(role.name)
-    //       })
-    //       localStorage.setItem("roles", JSON.stringify(rolesNames));
-    //       this.router.navigate(['/welcome']);
-    //     }
-    //   });
   }
 
   ngOnInit(): void {

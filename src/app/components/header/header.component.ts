@@ -10,7 +10,7 @@ import {Role} from "../../dto/role";
 export class HeaderComponent implements OnInit {
   login: any;
   roles: any;
-  isAdmin:boolean=false;
+  isAdmin: boolean = false;
 
   constructor(private router: Router) {
   }
@@ -24,17 +24,20 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/welcome'])
   }
 
-  userList(){
+  userList() {
     this.router.navigate(['/userList'])
   }
+
   ngOnInit(): void {
     this.login = localStorage.getItem("login")
     this.roles = JSON.parse(<string>localStorage.getItem("roles"));
-    this.roles.forEach((role:any)=>{
-      if(role==="ROLE_ADMIN"){
-        this.isAdmin=true;
-      }
-    })
+    if (this.roles !== null) {
+      this.roles.forEach((role: any) => {
+        if (role === "ROLE_ADMIN") {
+          this.isAdmin = true;
+        }
+      })
+    }
   }
 
 }

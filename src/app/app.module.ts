@@ -4,7 +4,7 @@ import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -16,7 +16,9 @@ import {UserTableComponent} from './components/user-table/user-table.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
 import {TableModule} from "primeng/table";
 import {CheckboxModule} from "primeng/checkbox";
-import { TranslatePipe } from './translate.pipe';
+import {TranslatePipe} from './translate.pipe';
+import {RequestInterceptor} from "./interceptors/request.interceptor";
+import {UserServiceService} from "./service/user-service.service";
 
 
 @NgModule({
@@ -51,7 +53,15 @@ import { TranslatePipe } from './translate.pipe';
       {path: 'editUser', component: EditUserComponent}
     ])
   ],
-  providers: [],
+  providers: [
+    UserServiceService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    }
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

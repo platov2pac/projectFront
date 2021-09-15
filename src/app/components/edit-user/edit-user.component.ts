@@ -15,7 +15,7 @@ export class EditUserComponent implements OnInit {
   checkOutForm: FormGroup;
   loginAuthUser: any;
   user: User = {login: '', email: '', password: '', dob: '', roles: []};
-  users: User[] = [];
+  isError: boolean = false;
   userRoles: Role[] = [];
 
 
@@ -42,11 +42,15 @@ export class EditUserComponent implements OnInit {
       this.userRoles.push(userRole);
     });
     user.roles = this.userRoles;
-    this.userService.editUser(user, isEdit).subscribe(user => {
+    this.userService.editUser(user, isEdit, this.loginAuthUser).subscribe(user => {
         this.redRouter.navigate(['/userList']);
+      },
+      error => {
+        if (error.status === 400) {
+          this.isError = true;
+        }
       }
     );
-    //this.userService.editLocalUer(user);
 
 
   }
@@ -54,16 +58,21 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     if (this.loginAuthUser != undefined) {
       this.userService.getUserByLogin(this.loginAuthUser).subscribe((user) => {
-        user.roles.forEach(role => {
-          this.selectedRoles.push(role.name);
-          // this.checkOutForm.controls['roles'].setValue(role.name);
-        });
-        // this.user = user;
-        this.checkOutForm.controls['login'].setValue(user.login);
-        this.checkOutForm.controls['email'].setValue(user.email);
-        this.checkOutForm.controls['dob'].setValue(user.dob);
+          this.selectedRoles = this.userService.displayRoles(user.roles);
+          this.checkOutForm.controls['roles'].setValue(this.selectedRoles);
+          this.checkOutForm.controls['login'].setValue(user.login);
+          this.checkOutForm.controls['email'].setValue(user.email);
+          this.checkOutForm.controls['dob'].setValue(user.dob);
 
-      })
+        },
+        error => {
+          if (error.status === 403) {
+            this.redRouter.navigate(['welcome']);
+          }
+        })
+    }
+    if (!localStorage.getItem("token")) {
+      this.redRouter.navigate(['auth'])
     }
   }
 

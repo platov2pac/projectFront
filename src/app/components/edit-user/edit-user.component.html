@@ -3,6 +3,7 @@
   <div class="content">
     <form [formGroup]="checkOutForm" (ngSubmit)="editUser(checkOutForm.value, loginAuthUser!=undefined)"
           class="edit-form">
+      <div *ngIf="isError" style="color: red">Login is exist or some input empty</div>
       <fieldset>
         <div *ngIf="loginAuthUser; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock>
